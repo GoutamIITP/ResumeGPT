@@ -3,55 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeGPT - Upload Resume</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+    <title>ResumeGPT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-lg w-full bg-white p-8 rounded-xl shadow-lg">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">ResumeGPT Parser</h1>
-        <p class="text-gray-600 mb-6 text-center">Upload your resume (PDF or Word) to extract key information using AI.</p>
-        
-        <!-- Error/Success Message -->
-        {% if error %}
-            <div class="bg-red-100 text-red-700 p-4 rounded mb-6" role="alert">
-                {{ error }}
-            </div>
-        {% endif %}
-        
-        <!-- Upload Form -->
-        <form id="uploadForm" method="post" enctype="multipart/form-data">
-            <div class="mb-6">
-                <label for="resume" class="block text-sm font-medium text-gray-700 mb-2">Select Resume</label>
-                <input type="file" id="resume" name="resume" accept=".pdf,.docx" 
-                       class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                              file:rounded file:border-0 file:text-sm file:font-semibold 
-                              file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" 
-                       aria-describedby="fileHelp" required>
-                <p id="fileHelp" class="mt-1 text-sm text-gray-500">Accepted formats: PDF, Word (.docx)</p>
-            </div>
-            <div class="mb-6">
-                <label class="flex items-center">
-                    <input type="checkbox" name="consent" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
-                    <span class="ml-2 text-sm text-gray-600">I consent to processing my resume data (deleted after parsing).</span>
-                </label>
-            </div>
-            <button type="submit" id="submitBtn" 
-                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed" 
-                    disabled>
-                Upload and Parse
-            </button>
+<body>
+    <div class="container">
+        <h1>ResumeGPT</h1>
+        <form method="POST" action="/">
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone" required><br>
+            <label for="job_description">Job Description:</label><br>
+            <textarea id="job_description" name="job_description" rows="5" cols="50" required></textarea><br>
+            <label for="eligibility">Eligibility Criteria:</label><br>
+            <textarea id="eligibility" name="eligibility" rows="5" cols="50" required></textarea><br>
+            <label for="skills">Skills (comma-separated):</label><br>
+            <input type="text" id="skills" name="skills" required><br>
+            <button type="submit">Generate Resume</button>
         </form>
-        
-        <!-- Loading Spinner -->
-        <div id="loading" class="hidden flex items-center justify-center mt-4">
-            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8 8 8 0 01-8-8z"></path>
-            </svg>
-            <span class="ml-2 text-gray-600">Processing...</span>
-        </div>
     </div>
-    <script src="/static/script.js"></script>
 </body>
 </html> 

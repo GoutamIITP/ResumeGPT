@@ -1,0 +1,30 @@
+[Full Name]
+[Email Address] | [Phone Number] | [LinkedIn/Portfolio]
+
+Objective
+[AI-generated objective tailored to the job description]
+
+Skills
+- [AI-generated skill 1]
+- [AI-generated skill 2]
+- [AI-generated skill 3]
+- [AI-generated skill 4]
+
+Professional Experience
+[AI-generated job title 1] | [Company Name] | [Dates]
+- [AI-generated responsibility 1]
+- [AI-generated responsibility 2]
+- [AI-generated achievement 1]
+
+[AI-generated job title 2] | [Company Name] | [Dates]
+- [AI-generated responsibility 1]
+- [AI-generated responsibility 2]
+- [AI-generated achievement 1]
+
+Education
+[AI-generated degree] | [University Name] | [Year]
+- [AI-generated relevant coursework or honors]
+
+Certifications
+- [AI-generated certification 1]
+- [AI-generated certification 2] 
