@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ResumeGPT</title>
+</head>
+<body>
+    <h1>ResumeGPT</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="resume">Upload Resume:</label>
+        <input type="file" name="resume" accept=".pdf,.docx" required><br>
+        <label for="job_role">Job Role:</label>
+        <input type="text" name="job_role" required><br>
+        <label for="location">Location:</label>
+        <input type="text" name="location" required><br>
+        <button type="submit">Submit</button>
+    </form>
+    {% if message %}\n        <p>{{ message }}</p>\n    {% endif %}\n</body>\n</html> 

@@ -1,0 +1,13 @@
+Flask
+PyPDF2
+pdfplumber
+transformers
+torch
+requests
+beautifulsoup4
+Selenium
+Pandas
+reportlab 
+requests
+spacy
+scrapy
