@@ -7,7 +7,10 @@ requests
 beautifulsoup4
 Selenium
 Pandas
-reportlab 
+reportlab
 requests
 spacy
 scrapy
+gunicorn
+cryptography
+python-docx
