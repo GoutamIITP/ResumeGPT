@@ -1,102 +1,132 @@
-# ResumeGPT Resume Parser
+# ResumeGPT: AI-Powered Resume Parser
 
-This project implements a web application using Flask and Generative AI to parse resumes (PDF/Word) and extract structured data.
+ResumeGPT is a web application designed to parse resumes (PDF and Word formats) using Generative AI and extract key information such as contact details, skills, experience, and education. The extracted structured data is then displayed on a user-friendly frontend interface.
 
-## Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Setup](#setup)
-- [Usage](#usage)
-- [Ethical Guidelines and Data Privacy](#ethical-guidelines-and-data-privacy)
-- [Future Improvements](#future-improvements)
+This project focuses on the core resume parsing and data extraction functionality, laying the groundwork for more advanced features like job matching and automated applications.
 
 ## Features
 
-- Upload PDF and Word (.docx) resumes.
-- Use Generative AI (Hugging Face Transformers) for resume parsing and entity extraction (Name, Email, Phone, Skills, Experience, Education).
-- Display extracted data in a user-friendly web interface.
-- Basic data privacy measures (temporary storage, file deletion).
+-   **Resume Upload:** Supports uploading resumes in PDF (.pdf) and Word (.docx) formats via a simple web form.
+-   **AI-Powered Parsing:** Utilizes a Hugging Face Transformers model (`dslim/bert-base-NER`) combined with regex and heuristic section detection to extract structured data (Name, Email, Phone, Skills, Experience, Education).
+-   **Structured Data Display:** Presents the extracted information in a clean, organized, and responsive format on a dedicated results page.
+-   **User Consent:** Includes a mandatory consent checkbox for data processing, emphasizing user privacy.
+-   **Real-time UI Feedback:** Provides visual feedback during file upload and processing using JavaScript and a loading spinner.
+-   **Temporary Storage:** Uploaded resumes are stored temporarily and automatically deleted after parsing to enhance privacy.
 
-## Tech Stack
+## Technology Stack
 
-- **Backend:** Python, Flask, pdfplumber, transformers, torch.
-- **Frontend:** HTML, Tailwind CSS.
-- **Storage:** Temporary file storage.
+-   **Backend:**
+    -   Python
+    -   Flask: Web framework for handling requests and rendering templates.
+    -   `pdfplumber`: For extracting text from PDF files.
+    -   `python-docx`: For extracting text from Word (.docx) files.
+    -   `transformers`: Leveraging Hugging Face models for Named Entity Recognition (NER).
+    -   `torch`: Deep learning framework dependency for `transformers`.
+-   **Frontend:**
+    -   HTML5: Structure of the web pages.
+    -   Tailwind CSS: Utility-first CSS framework for rapid styling and responsiveness.
+    -   JavaScript: For frontend interactivity, file validation, and loading states.
+-   **Other Libraries (Used in project plan but potentially for future features):** `requests`, `beautifulsoup4`, `Selenium`, `Pandas`, `reportlab`, `spacy`, `scrapy`, `gunicorn` (for deployment), `cryptography` (for optional encryption).
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+*   Python 3.8+
+*   `pip` (Python package installer)
+*   A stable internet connection to download models and dependencies.
 
 ## Setup
 
-1. **Clone the repository:**
+Follow these steps to set up and run the project locally:
 
-   ```bash
-   git clone <repository_url>
-   cd resumegpt
-   ```
+1.  **Clone the repository:**
 
-2. **Create a virtual environment and activate it:**
+    ```bash
+    git clone <repository_url>
+    cd resumegpt
+    ```
 
-   ```bash
-   python -m venv resumegpt_env
-   source resumegpt_env/bin/activate  # On Windows: resumegpt_env\Scripts\activate
-   ```
+2.  **Create a virtual environment and activate it:**
 
-3. **Install dependencies:**
+    ```bash
+    python -m venv .venv
+    # On macOS/Linux:
+    source .venv/bin/activate
+    # On Windows:
+    .\.venv\Scripts\activate
+    ```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+3.  **Install dependencies:**
 
-   *(Note: You might need to install additional libraries like `python-docx` if not already in `requirements.txt` for Word support, and potentially download a spaCy model if using spaCy for NER.)*
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Usage
 
-1. **Run the Flask application:**
+1.  **Run the Flask application:**
 
-   ```bash
-   python app.py
-   ```
+    ```bash
+    python app.py
+    ```
 
-2. **Open your web browser** and navigate to `http://localhost:5000`.
+    The application will start, and you should see output indicating the development server is running.
 
-3. **Upload a PDF or Word resume** using the form.
+2.  **Open your web browser** and navigate to `http://127.0.0.1:5000/`.
 
-4. **View the extracted structured data** on the results page.
+3.  **Upload a Resume:**
+    *   On the upload page, select a PDF or Word (.docx) resume file.
+    *   Check the consent box to agree to data processing.
+    *   Click the "Upload and Parse" button.
 
-## Ethical Guidelines and Data Privacy
+4.  **View Extracted Data:**
+    *   The application will process the resume (a loading spinner will be shown).
+    *   You will be redirected to the results page displaying the extracted Name, Email, Phone, Skills, Experience, and Education sections.
 
-- Uploaded resumes are intended for temporary processing only and are deleted after parsing.
-- We aim to comply with data privacy regulations like GDPR/CCPA.
-- **Important:** The current implementation uses basic file handling. For production environments, enhance security with proper encryption and secure storage solutions.
-- User consent for data processing is a critical consideration for production deployments.
+5.  **Upload Another:** Click the "Upload Another Resume" button to return to the upload page.
 
-## Future Improvements
+## Ethical Considerations and Data Privacy
 
-- Integrate with a more advanced Gen AI model (e.g., xAI Grok 3 API) for improved parsing accuracy.
-- Implement robust encryption for uploaded files.
-- Add user authentication and management.
-- Enhance the frontend with more detailed and interactive display of extracted data.
-- Implement more sophisticated entity extraction and data structuring logic.
-- Add support for other resume formats.
-- Incorporate job scraping and application management features as outlined in the initial project description.
+-   **Temporary Processing:** Uploaded resumes are processed in memory and/or stored temporarily only as needed for parsing. They are deleted from the server's temporary storage immediately after processing is complete.
+-   **User Consent:** Explicit consent is required from the user before processing their resume data.
+-   **Transparency:** The application clearly states the purpose of data processing and the temporary nature of storage.
+-   **Disclaimer:** This is a demonstration project. For production deployments handling sensitive user data, significantly more robust security measures (e.g., strong encryption at rest and in transit, secure storage solutions, detailed privacy policy) are essential to comply with regulations like GDPR, CCPA, etc.
 
-Dependencies
+## Project Structure
 
-* Flask
+```
+resumegpt/
+├── app.py                  # Main Flask application
+├── resume_parser.py        # Resume parsing logic
+├── templates/             # HTML templates
+│   ├── index.html        # Resume upload form
+│   └── results.html      # Display extracted data
+├── static/                # Static files (CSS, JS)
+│   ├── script.js         # Frontend JavaScript
+│   └── style.css         # Custom CSS
+├── resumes/               # Temporary storage for uploaded resumes (created by app.py)
+├── README.md             # Project documentation
+└── requirements.txt       # Python dependencies
+```
 
-* PyPDF2
+## Future Enhancements
 
-* pdfplumber
+Based on the initial project vision, the following features could be added:
 
-* transformers
+-   **Improved Parsing:** Integrate more advanced Gen AI models (e.g., fine-tuned models or commercial APIs like xAI Grok 3, if available) for higher accuracy in entity and section extraction.
+-   **Robust Data Extraction:** Enhance parsing logic to better handle complex resume formats, tables, and less common section titles.
+-   **Advanced Security:** Implement robust encryption for resumes temporarily stored on the server.
+-   **Error Handling & Feedback:** More detailed error messages and user guidance for parsing failures.
+-   **Job Matching:** Develop functionality to match extracted resume skills and experience with job descriptions.
+-   **Automated Applications:** Implement features for tailoring resumes/cover letters and submitting applications to job boards.
+-   **User Management:** Add authentication and user profiles.
+-   **Frontend Improvements:** More interactive display of data, options to edit extracted information, downloadable results.
 
-* torch
+## Contributing
 
-* requests
+Contributions are welcome! Please follow standard practices: Fork the repository, create a branch, and submit a pull request with your changes.
 
-* BeautifulSoup
+## License
 
-* Selenium
-
-* Pandas
-
-* reportlab 
+This project is licensed under the [MIT License](LICENSE). (Note: Create a LICENSE file if you don't have one.) 
