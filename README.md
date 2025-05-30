@@ -99,6 +99,11 @@ Follow these steps to set up and run the project locally:
 resumegpt/
 ├── app.py                  # Main Flask application
 ├── resume_parser.py        # Resume parsing logic
+├── application_manager.py  # Logic for managing job applications
+├── job_matcher.py          # Logic for matching resumes to jobs
+├── job_scraper.py          # Logic for scraping job listings
+├── scheduler.py            # Logic for scheduling tasks (e.g., applications)
+├── jobs.json               # Placeholder or data file for job listings
 ├── templates/             # HTML templates
 │   ├── index.html        # Resume upload form
 │   └── results.html      # Display extracted data
